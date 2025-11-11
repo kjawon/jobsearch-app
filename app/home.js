@@ -1,10 +1,20 @@
 import {Text, View} from 'react-native';
+import { useState } from 'react';
+import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS, icons, images } from '../constants';
 import { Stack } from 'expo-router';
-import {ScreenHeaderBtn,Welcome} from "./components"
+import ScreenHeaderBtn from './components/header/ScreenHeaderBtn';
+import { Welcome, Nearbyjobs, Popularjobs } from './components/home';
 
-const Home = () => {
+export default function Home() {
+    const [searchTerm, setSearchTerm] = useState("");
+    
+    const handleClick = () => {
+        // 검색 로직 추가
+        console.log("Searching for:", searchTerm);
+    }
+
     return (
         <SafeAreaView style = {{flex:1, backgroundColor: COLORS.lightWhite}}>
             <Stack.Screen
@@ -20,8 +30,15 @@ const Home = () => {
                     headerTitle: "Header"
                 }}
             />
-            <Welcome/>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <Welcome 
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
+                    handleClick={handleClick}
+                />
+                <Popularjobs />
+                <Nearbyjobs />
+            </ScrollView>
         </SafeAreaView>
     );
 }
-export default Home;
