@@ -13,7 +13,7 @@ import styles from "./welcome.style"
 import {icons, SIZES} from "../../../../constants"
 
 const jobTypes = ["Full-time", "Part-time", "Contractor"]
-const Welcome = ({searchTerm,setsearchTerm,handleClick})=> {
+const Welcome = ({searchTerm, setsearchTerm, handleClick})=> {
     const router = useRouter();
     const [activeJobType, setActiveJobType] = useState("Full-time")
     return(
@@ -27,7 +27,7 @@ const Welcome = ({searchTerm,setsearchTerm,handleClick})=> {
                     <TextInput
                         style = {styles.searchInput}
                         value = {searchTerm}
-                        onChangeText={(text)=>setsearchTerm(text)}
+                        onChangeText={(text)=> setsearchTerm(text)}
                         placeholder="어떤 잡을 원하시나요?"
                     />
                 </View>
