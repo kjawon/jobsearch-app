@@ -5,14 +5,15 @@ import {
     TextInput,
     Pressable,
     Image,
-    FlatList
+    FlatList,
+    TouchableOpacity
 } from "react-native"
 import { useRouter } from "expo-router"
 import styles from "./welcome.style"
 import {icons, SIZES} from "../../../../constants"
 
 const jobTypes = ["Full-time", "Part-time", "Contractor"]
-const Welcome = (searchTerm,setsearchTerm,handleClick)=> {
+const Welcome = ({searchTerm,setsearchTerm,handleClick})=> {
     const router = useRouter();
     const [activeJobType, setActiveJobType] = useState("Full-time")
     return(
@@ -30,16 +31,35 @@ const Welcome = (searchTerm,setsearchTerm,handleClick)=> {
                         placeholder="어떤 잡을 원하시나요?"
                     />
                 </View>
-                <Pressable style = {styles.searchBtn} onPress={handleClick}>
+                <TouchableOpacity style = {styles.searchBtn} onPress={handleClick}>
                     <Image
                         source={icons.search}
                         resizeMode="contain"
                         style={styles.searchBtnImage}
                     />
-                </Pressable>
+                </TouchableOpacity>
+            </View>
+            <View style = {styles.tabsContainer}>
+                <FlatList
+                    data={jobTypes}
+                    renderItem={({item}) => (
+                        <TouchableOpacity
+                            style={styles.tab(activeJobType, item)}
+                            onPress={()=>{
+                                setActiveJobType(item);
+                                router.push('/search/${item}');
+                            }}
+                        >
+                            <Text style={styles.tabText(activeJobType,item)}>{item}</Text>
+                        </TouchableOpacity>
+                    )}
+                    keyExtractor={(item)=>item}
+                    contentContainerStyle={{columnGap:SIZES.small}}
+                    horizontal
+                />
             </View>
         </View>
-    )
-}
+    );
+};
 
 export default Welcome

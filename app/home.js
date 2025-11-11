@@ -2,10 +2,9 @@ import {Text, View} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS, icons, images } from '../constants';
 import { Stack } from 'expo-router';
-import ScreenHeaderBtn from './components/header/ScreenHeaderBtn';
-import { Welcome } from './components/home';
+import {ScreenHeaderBtn,Welcome} from "./components"
 
-export default function Home() {
+const Home = () => {
     return (
         <SafeAreaView style = {{flex:1, backgroundColor: COLORS.lightWhite}}>
             <Stack.Screen
@@ -25,3 +24,4 @@ export default function Home() {
         </SafeAreaView>
     );
 }
+export default Home;
